@@ -80,7 +80,7 @@ export class ProductDetailComponent implements OnInit {
           () => this.dataSaved()
         );
     } else {
-      console.log(this.product);
+      console.log('product-detail.ts: ', this.product);
       // Add a product
       this.productService.addProduct(this.product)
         // tslint:disable-next-line: deprecation

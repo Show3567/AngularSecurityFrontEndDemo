@@ -35,7 +35,6 @@ export class ProductService {
   }
 
   addProduct(entity: Product): Observable<Product> {
-    console.log(entity);
     return this.http.post<Product>(API_URL, entity, httpOptions);
   }
 

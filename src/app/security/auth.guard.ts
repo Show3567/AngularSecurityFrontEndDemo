@@ -29,9 +29,7 @@ export class AuthGuard implements CanActivate {
 
     const claimType: string = next.data.claimType;
     const isAuthenticated = this.securityService.securityObject.isAuthenticated;
-    const claim = this.securityService.securityObject[claimType];
-
-    console.log(state);
+    const claim = this.securityService.securityObject.claim[claimType];
 
     if (isAuthenticated && claim) {
       return true;

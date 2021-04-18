@@ -10,7 +10,7 @@
     <button
       class="btn btn-primary"
       (click)="addProduct()"
-      *ngIf="securityObject.canAddProducts"
+      *ngIf="securityObject.claim.canAddProducts"
     >
       Add New Product
     </button>

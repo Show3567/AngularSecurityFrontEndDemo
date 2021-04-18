@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppUserAuth } from './app-user-auth';
 import { AppUser } from './app-user';
-import { LOGIN_MOCKS } from './login-mocks';
+// import { LOGIN_MOCKS } from './login-mocks';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -25,7 +25,7 @@ export class SecurityService {
 
   login(entity: AppUser): Observable<AppUserAuth> {
     this.resetSecurityObject();
-    console.log('entity: ', entity);
+    console.log('entity: ', entity, this.securityObject);
 
     return this.http.post<AppUserAuth>(API_URL + 'login', entity, httpOptions).pipe(
       tap(data => {
@@ -41,7 +41,7 @@ export class SecurityService {
     //     user.userName.toLowerCase() === entity.userName.toLowerCase())
     // );
     // if (this.securityObject.userName !== '') {
-    //   console.log(111);
+
     //   localStorage.setItem('bearerToken', this.securityObject.bearerToken);
     // }
 
@@ -53,17 +53,19 @@ export class SecurityService {
   }
 
   resetSecurityObject(): void {
-    this.securityObject.userName = '';
-    this.securityObject.bearerToken = '';
-    this.securityObject.isAuthenticated = false;
+      this.securityObject.userName = '';
+      this.securityObject.bearerToken = '';
+      this.securityObject.isAuthenticated = false;
 
-    this.securityObject.canAccessProducts = false;
-    this.securityObject.canAddProducts = false;
-    this.securityObject.canSaveProduct = false;
-    this.securityObject.canAccessCategories = false;
-    this.securityObject.canAddCategory = false;
-
-    localStorage.removeItem('bearerToken');
+      this.securityObject.claim = {
+        canAccessProducts: false,
+        canAddProducts: false,
+        canSaveProduct: false,
+        canAccessCategories: false,
+        canAddCategory: false,
+      };
+      // console.log('security.service, reset: ', this.securityObject);
+      localStorage.removeItem('bearerToken');
   }
 
 }

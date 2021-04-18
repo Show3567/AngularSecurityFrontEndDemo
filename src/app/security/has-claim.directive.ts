@@ -13,11 +13,11 @@ export class HasClaimDirective {
     private securityService: SecurityService
   ) { }
 
-  // @Input() set hasClaim(claimType: any) {
-  //   if (this.securityService.hasClaim(claimType)) {
-  //     this.viewContainer.createEmbeddedView(this.templateRef);
-  //   } else {
-  //     this.viewContainer.clear();
-  //   }
-  // }
+  @Input() set hasClaim(claimType: string) {
+    if (this.securityService.securityObject.claim[claimType]) {
+      this.viewContainer.createEmbeddedView(this.templateRef);
+    } else {
+      this.viewContainer.clear();
+    }
+  }
 }

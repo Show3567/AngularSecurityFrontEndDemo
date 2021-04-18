@@ -3,9 +3,17 @@ export class AppUserAuth {
     bearerToken = '';
     isAuthenticated = false;
 
-    canAccessProducts = false;
-    canAddProducts = false;
-    canSaveProduct = false;
-    canAccessCategories = false;
-    canAddCategory = false;
+    claim = {
+        canAccessProducts: false,
+        canAddProducts: false,
+        canSaveProduct: false,
+        canAccessCategories: false,
+        canAddCategory: false,
+    };
+
+    // canAccessProducts = false;
+    // canAddProducts = false;
+    // canSaveProduct = false;
+    // canAccessCategories = false;
+    // canAddCategory = false;
 }
