@@ -5,6 +5,7 @@ import { AppUser } from './app-user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import * as jwt_decode from 'jwt-decode'; // decode the jwt
 
 const API_URL = 'http://localhost:4231/api/';
 const httpOptions = {
@@ -32,6 +33,8 @@ export class SecurityService {
         console.log('get data from back end: ', data);
         Object.assign(this.securityObject, data);
         localStorage.setItem('bearerToken', this.securityObject.bearerToken);
+
+        console.log(this.securityObject.bearerToken);
       })
     );
 
