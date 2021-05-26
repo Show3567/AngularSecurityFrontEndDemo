@@ -34,7 +34,7 @@ export class SecurityService {
         Object.assign(this.securityObject, data);
         localStorage.setItem('bearerToken', this.securityObject.bearerToken);
 
-        console.log(this.securityObject.bearerToken);
+        console.log('token: ', this.securityObject.bearerToken);
       })
     );
 
@@ -44,10 +44,8 @@ export class SecurityService {
     //     user.userName.toLowerCase() === entity.userName.toLowerCase())
     // );
     // if (this.securityObject.userName !== '') {
-
     //   localStorage.setItem('bearerToken', this.securityObject.bearerToken);
     // }
-
     // return of<AppUserAuth>(this.securityObject);
   }
 
