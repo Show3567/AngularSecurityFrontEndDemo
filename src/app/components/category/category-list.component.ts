@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { AppUserAuth } from '../security/app-user-auth';
-import { Category } from './category';
-import { CategoryService } from './category.service';
-import { SecurityService } from '../security/security.service';
+import { Component, OnInit } from "@angular/core";
+import { AppUserAuth } from "../../shared/interfaces/app-user-auth";
+import { Category } from "./category";
+import { CategoryService } from "./category.service";
+import { SecurityService } from "../../core/services/security.service";
 
 @Component({
-  templateUrl: './category-list.component.html'
+  templateUrl: "./category-list.component.html",
 })
 export class CategoryListComponent implements OnInit {
   categories: Category[];
@@ -23,8 +23,9 @@ export class CategoryListComponent implements OnInit {
   }
 
   private getCategories(): void {
-    this.categoryService.getCategories()
+    this.categoryService
+      .getCategories()
       // tslint:disable-next-line: deprecation
-      .subscribe(categories => this.categories = categories);
+      .subscribe((categories) => (this.categories = categories));
   }
 }

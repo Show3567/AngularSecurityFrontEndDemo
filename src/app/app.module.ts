@@ -1,38 +1,31 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
 
-import { ProductDetailComponent } from './product/product-detail.component';
-import { ProductListComponent } from './product/product-list.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { CategoryListComponent } from './category/category-list.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpInterceptorModule } from './security/http-interceptors';
-import { HasClaimDirective } from './security/has-claim.directive';
+import { ComponentsModule } from "./components/components.module";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { HttpInterceptorModule } from "./security/http-interceptors";
+import { HasClaimDirective } from "./security/has-claim.directive";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    ProductDetailComponent,
-    ProductListComponent,
-    DashboardComponent,
-    CategoryListComponent,
-    HasClaimDirective,
-  ],
-
+  declarations: [AppComponent, HasClaimDirective],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     FontAwesomeModule,
-    HttpInterceptorModule // interceptors;
+    HttpInterceptorModule,
+    BrowserAnimationsModule, // interceptors;
+    ComponentsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

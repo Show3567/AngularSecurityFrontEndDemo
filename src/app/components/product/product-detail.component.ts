@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Location } from '@angular/common';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Params } from "@angular/router";
+import { Location } from "@angular/common";
 
-import { ProductService } from './product.service';
-import { Product } from './product';
-import { Category } from '../category/category';
-import { CategoryService } from '../category/category.service';
-import { AppUserAuth } from '../security/app-user-auth';
-import { SecurityService } from '../security/security.service';
+import { ProductService } from "./product.service";
+import { Product } from "./product";
+import { Category } from "../category/category";
+import { CategoryService } from "../category/category.service";
+import { AppUserAuth } from "../../shared/interfaces/app-user-auth";
+import { SecurityService } from "../../core/services/security.service";
 
 @Component({
-  templateUrl: './product-detail.component.html'
+  templateUrl: "./product-detail.component.html",
 })
 export class ProductDetailComponent implements OnInit {
   product: Product;
@@ -31,7 +31,7 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit() {
     this.getCategories();
     // Get the passed in product id
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get("id");
 
     // Create or load a product
     this.createOrLoadProduct(id);
@@ -43,9 +43,10 @@ export class ProductDetailComponent implements OnInit {
       this.initProduct();
     } else {
       // Get a product from product service
-      this.productService.getProduct(id)
+      this.productService
+        .getProduct(id)
         // tslint:disable-next-line: deprecation
-        .subscribe(product => {
+        .subscribe((product) => {
           this.product = product;
           this.originalProduct = Object.assign({}, this.product);
         });
@@ -57,36 +58,44 @@ export class ProductDetailComponent implements OnInit {
     this.product = new Product({
       introductionDate: new Date(),
       price: 1,
-      url: 'www.fairwaytech.com'
+      url: "www.fairwaytech.com",
     });
     this.originalProduct = Object.assign({}, this.product);
   }
 
   private getCategories(): void {
-    this.categoryService.getCategories()
+    this.categoryService
+      .getCategories()
       // tslint:disable-next-line: deprecation
-      .subscribe(categories => this.categories = categories);
+      .subscribe((categories) => (this.categories = categories));
   }
 
   saveData(): void {
-
     if (this.product._id) {
       // Update product
-      this.productService.updateProduct(this.product)
+      this.productService
+        .updateProduct(this.product)
         // tslint:disable-next-line: deprecation
         .subscribe(
-          product => { this.product = product; },
+          (product) => {
+            this.product = product;
+          },
           () => null,
           () => this.dataSaved()
         );
     } else {
-      console.log('product-detail.ts: ', this.product);
+      console.log("product-detail.ts: ", this.product);
       // Add a product
-      this.productService.addProduct(this.product)
+      this.productService
+        .addProduct(this.product)
         // tslint:disable-next-line: deprecation
-        .subscribe(product => { this.product = product; },
+        .subscribe(
+          (product) => {
+            this.product = product;
+          },
           () => null,
-          () => this.dataSaved());
+          () => this.dataSaved()
+        );
     }
   }
 

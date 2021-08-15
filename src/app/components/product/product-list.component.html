@@ -8,7 +8,8 @@
   <div class="col-xs-12">
     <!-- <button class="btn btn-primary" (click)="addProduct()" *hasClaim="'canAddProduct'"> -->
     <button
-      class="btn btn-primary"
+      mat-raised-button
+      color="primary"
       (click)="addProduct()"
       *ngIf="securityObject.claim.canAddProducts"
     >
@@ -32,21 +33,26 @@
     <tbody>
       <tr *ngFor="let product of products">
         <td>
-          <a
+          <button
             href="#"
-            class="btn btn-primary"
+            mat-raised-button
+            color="primary"
             [routerLink]="['/productDetail', product._id]"
           >
-            <fa-icon [icon]="pencil"></fa-icon>
-          </a>
+            <mat-icon>edit</mat-icon>
+          </button>
         </td>
         <td>{{ product.productName }}</td>
         <td>{{ product.introductionDate | date: "MM/dd/yyyy" }}</td>
         <td class="text-right">{{ product.price | currency }}</td>
         <td>{{ product.url | lowercase }}</td>
         <td>
-          <button (click)="deleteProduct(product._id)" class="btn btn-danger">
-            <fa-icon [icon]="trash"></fa-icon>
+          <button
+            (click)="deleteProduct(product._id)"
+            mat-raised-button
+            color="warn"
+          >
+            <mat-icon>delete</mat-icon>
           </button>
         </td>
       </tr>

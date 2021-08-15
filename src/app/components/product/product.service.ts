@@ -1,26 +1,25 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
-import { Product } from './product';
-import { SecurityService } from '../security/security.service';
+import { Product } from "./product";
+import { SecurityService } from "../../core/services/security.service";
 
-const API_URL = 'http://localhost:4231/api/product/';
+const API_URL = "http://localhost:4231/api/product/";
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
+    "Content-Type": "application/json",
+  }),
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ProductService {
-
   constructor(
     private http: HttpClient,
     private securityService: SecurityService
-  ) { }
+  ) {}
 
   getProducts(): Observable<Product[]> {
     // const httpheader = new HttpHeaders()
