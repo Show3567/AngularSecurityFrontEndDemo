@@ -5,7 +5,7 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { LoginComponent } from "./components/login/login.component";
 import { ProductDetailComponent } from "./components/product/product-detail.component";
 import { ProductListComponent } from "./components/product/product-list.component";
-import { AuthGuard } from "./security/auth.guard";
+import { AuthGuard } from "./core/guards/auth.guard";
 
 const routes: Routes = [
   {

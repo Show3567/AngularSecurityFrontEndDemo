@@ -1,5 +1,5 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from "@angular/core";
-import { SecurityService } from "../core/services/security.service";
+import { SecurityService } from "../../core/services/security.service";
 
 @Directive({
   // tslint:disable-next-line: directive-selector
