@@ -10,6 +10,8 @@ import { Router, ActivatedRoute } from "@angular/router";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
+  hide = true;
+
   user: AppUser = new AppUser();
   securityObject: AppUserAuth = null;
   returnUrl: string;
@@ -20,11 +22,16 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
+  ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParamMap.get("returnUrl");
+  }
+
   login() {
     // tslint:disable-next-line: deprecation
     this.securityService.login(this.user).subscribe(
       (info) => {
-        this.securityObject = info;
+        console.log(info);
+        this.securityObject = info.body;
         if (this.returnUrl) {
           this.router.navigateByUrl(this.returnUrl);
         }
@@ -33,9 +40,5 @@ export class LoginComponent implements OnInit {
         this.securityObject = new AppUserAuth();
       }
     );
-  }
-
-  ngOnInit(): void {
-    this.returnUrl = this.route.snapshot.queryParamMap.get("returnUrl");
   }
 }

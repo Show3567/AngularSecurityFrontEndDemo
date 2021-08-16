@@ -1,13 +1,16 @@
 import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
+import { Observable, of } from "rxjs";
+import { map, tap } from "rxjs/operators";
+import jwt_decode from "jwt-decode";
+
 import { AppUserAuth } from "../../shared/interfaces/app-user-auth";
 import { AppUser } from "../../shared/interfaces/app-user";
 // import { LOGIN_MOCKS } from './login-mocks';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable, of } from "rxjs";
-import { tap } from "rxjs/operators";
 
 const API_URL = "http://localhost:4231/api/";
 const httpOptions = {
+  observe: "response" as "body", // check the whole response
   headers: new HttpHeaders({
     "Content-Type": "application/json",
   }),
@@ -21,16 +24,24 @@ export class SecurityService {
 
   constructor(private http: HttpClient) {}
 
-  login(entity: AppUser): Observable<AppUserAuth> {
+  login(entity: AppUser) {
     this.resetSecurityObject();
-    console.log("entity: ", entity, this.securityObject);
 
     return this.http
-      .post<AppUserAuth>(API_URL + "login", entity, httpOptions)
+      .post<AppUserAuth>(API_URL + "login", entity, { observe: "response" })
       .pipe(
-        tap((data) => {
-          console.log("get data from back end: ", data);
-          Object.assign(this.securityObject, data);
+        tap((data: any) => {
+          // get jwt from response headers
+          console.log(data.headers.get("bearerToken"));
+
+          // get data from jwt
+          const decoded = jwt_decode(data.body.bearerToken);
+          console.log(decoded);
+
+          // update shared object
+          Object.assign(this.securityObject, data.body);
+
+          // store jwt into localstorage
           localStorage.setItem("bearerToken", this.securityObject.bearerToken);
         })
       );
@@ -40,19 +51,18 @@ export class SecurityService {
     //   LOGIN_MOCKS.find(user =>
     //     user.userName.toLowerCase() === entity.userName.toLowerCase())
     // );
-    // if (this.securityObject.userName !== '') {
-
+    // if (this.securityObject.userName !== '')
     //   localStorage.setItem('bearerToken', this.securityObject.bearerToken);
-    // }
-
     // return of<AppUserAuth>(this.securityObject);
   }
 
   logout(): void {
     this.resetSecurityObject();
+    console.log("logout");
   }
 
   resetSecurityObject(): void {
+    // this.securityObject = new AppUserAuth();
     this.securityObject.userName = "";
     this.securityObject.bearerToken = "";
     this.securityObject.isAuthenticated = false;
@@ -64,7 +74,7 @@ export class SecurityService {
       canAccessCategories: false,
       canAddCategory: false,
     };
-    // console.log('security.service, reset: ', this.securityObject);
+
     localStorage.removeItem("bearerToken");
   }
 }
