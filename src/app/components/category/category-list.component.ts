@@ -16,6 +16,7 @@ export class CategoryListComponent implements OnInit {
     private securityService: SecurityService
   ) {
     this.securityObject = this.securityService.securityObject;
+    console.log("show object in categories: ", this.securityObject);
   }
 
   ngOnInit() {

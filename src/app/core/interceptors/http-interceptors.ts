@@ -1,12 +1,12 @@
-import { Injectable, NgModule } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable, NgModule } from "@angular/core";
+import { Observable } from "rxjs";
 import {
   HttpEvent,
   HttpInterceptor,
   HttpHandler,
   HttpRequest,
-} from '@angular/common/http';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+} from "@angular/common/http";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -14,13 +14,14 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('bearerToken'); // get token from localStorage;
-    // console.log('interceptor token: ', token);
+    // get token from localStorage;
+    const token = localStorage.getItem("bearerToken");
+
     if (token) {
       const newReq = req.clone({
-        headers: req.headers.set('Authorization', 'Bearer' + token),
+        headers: req.headers.set("Authorization", "Bearer" + token),
       });
-      console.log('newReq: ', newReq);
+      console.log("newReq: ", newReq);
       return next.handle(newReq);
     } else {
       return next.handle(req);

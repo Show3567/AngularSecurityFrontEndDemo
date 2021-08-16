@@ -49,12 +49,16 @@ export class ProductListComponent implements OnInit {
 
   deleteProduct(id: string): void {
     if (confirm("Delete this product?")) {
-      this.productService
-        .deleteProduct(id)
-        // tslint:disable-next-line: deprecation
-        .subscribe(
-          () => (this.products = this.products.filter((p) => +p._id !== +id))
-        );
+      this.productService.deleteProduct(id).subscribe((data: any) => {
+        this.products = data.map((ele: any) => ({
+          _id: ele._id,
+          productName: ele.productName,
+          introductionDate: ele.introductionDate,
+          price: ele.price,
+          url: ele.url,
+          categoryId: ele.categoryId,
+        }));
+      });
     }
   }
 }

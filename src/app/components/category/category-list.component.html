@@ -1,17 +1,14 @@
-<div class="row">
-  <div class="col-xs-12">
-    <h1>Category List</h1>
-  </div>
-</div>
+<h1>Category List</h1>
 
-<div class="row">
-  <div class="col-xs-12">
-    <button mat-raised-button color="primary" *hasClaim="'canAddCategory'">
-      <!-- <button class="btn btn-primary" *ngIf="securityObject.claim.canAddCategory"> -->
-      Add New Category
-    </button>
-  </div>
-</div>
+<!-- <button mat-raised-button color="primary" *hasClaim="'canAddCategory'"> -->
+<button
+  style="margin-bottom: 15px"
+  mat-raised-button
+  color="primary"
+  *ngIf="securityObject.claim.canAddCategory"
+>
+  Add New Category
+</button>
 
 <div *ngIf="categories && categories.length">
   <table class="table table-bordered table-striped table-condensed">
