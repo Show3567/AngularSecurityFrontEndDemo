@@ -36,7 +36,7 @@ export class SecurityService {
 
           // get data from jwt
           const decoded = jwt_decode(data.body.bearerToken);
-          console.log(decoded);
+          console.log("decoded info: ", decoded);
 
           // update shared object
           Object.assign(this.securityObject, data.body);

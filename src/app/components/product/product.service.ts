@@ -24,7 +24,7 @@ export class ProductService {
   getProducts(): Observable<Product[]> {
     // const httpheader = new HttpHeaders()
     //   .set('Authorization', 'Bearer' + this.securityService.securityObject.bearerToken);
-    // console.log('jwt token: ', httpheader);
+    // // console.log('jwt token: ', httpheader);
     // return this.http.get<Product[]>(API_URL, { headers: httpheader });
     return this.http.get<Product[]>(API_URL);
   }

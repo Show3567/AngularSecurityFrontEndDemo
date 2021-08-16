@@ -7,6 +7,7 @@ import {
   HttpRequest,
 } from "@angular/common/http";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { catchError } from "rxjs/operators";
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
