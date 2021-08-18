@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         password: ["", [Validators.required]],
       },
       {
-        asyncValidator: this.validateUserIsAuthenticated,
+        // asyncValidator: this.validateUserIsAuthenticated,
       }
     );
   }
@@ -47,12 +47,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.returnUrl = this.route.snapshot.queryParamMap.get("returnUrl");
 
-    this.form
-      .get("password")
-      .valueChanges.pipe(debounceTime(2000))
-      .subscribe((data: any) => {
-        console.log(data);
-      });
+    // this.form
+    //   .get("password")
+    //   .valueChanges.pipe(debounceTime(2000))
+    //   .subscribe((data: any) => {
+    //     console.log(data);
+    //   });
   }
 
   // login() {
@@ -88,25 +88,24 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  validateUserIsAuthenticated = (
-    group: AbstractControl
-  ): Observable<ValidationErrors | null> => {
-    const obj = {
-      userName: group.value.username,
-      password: group.value.password,
-    };
+  // validateUserIsAuthenticated = (
+  //   group: AbstractControl
+  // ): Observable<ValidationErrors | null> => {
+  //   const obj = {
+  //     userName: group.value.username,
+  //     password: group.value.password,
+  //   };
 
-    return timer(500).pipe(
-      switchMap(() => {
-        return this.securityService.login(obj).pipe(
-          tap((data) => console.log("data in validater: ", data)),
-          map((data) => null),
-          catchError((err: any) => {
-            console.log("err: ", err);
-            return of(null);
-          })
-        );
-      })
-    );
-  };
+  //   return timer(500).pipe(
+  //     switchMap(() => {
+  //       return this.securityService.login(obj).pipe(
+  //         tap((data) => console.log("data in validater: ", data)),
+  //         map((data) => null),
+  //         catchError((err: any) => {
+  //           return of({ errormessage: err.error });
+  //         })
+  //       );
+  //     })
+  //   );
+  // };
 }

@@ -1,5 +1,5 @@
 import { Injectable, NgModule } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import {
   HttpEvent,
   HttpInterceptor,
@@ -23,9 +23,19 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         headers: req.headers.set("Authorization", "Bearer" + token),
       });
       // console.log("newReq: ", newReq);
-      return next.handle(newReq);
+      return next.handle(newReq).pipe(
+        catchError((err) => {
+          console.log("from interceptor: ", err.error);
+          return of(null);
+        })
+      );
     } else {
-      return next.handle(req);
+      return next.handle(req).pipe(
+        catchError((err) => {
+          console.log("from interceptor: ", err.error);
+          return of(null);
+        })
+      );
     }
   }
 }

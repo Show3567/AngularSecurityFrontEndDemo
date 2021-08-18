@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const token = localStorage.getItem("bearerToken");
+
     if (token) {
       const decoded: any = jwt_decode(token);
       console.log(decoded);
