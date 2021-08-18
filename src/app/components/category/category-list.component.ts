@@ -9,14 +9,14 @@ import { SecurityService } from "../../core/services/security.service";
 })
 export class CategoryListComponent implements OnInit {
   categories: Category[];
-  securityObject: AppUserAuth = new AppUserAuth();
+  securityObj: AppUserAuth = new AppUserAuth();
 
   constructor(
     private categoryService: CategoryService,
     private securityService: SecurityService
   ) {
-    this.securityObject = this.securityService.securityObject;
-    console.log("show object in categories: ", this.securityObject);
+    this.securityObj = this.securityService.securityObj;
+    // console.log("show object in categories: ", this.securityObj);
   }
 
   ngOnInit() {

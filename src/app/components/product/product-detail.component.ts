@@ -16,7 +16,7 @@ export class ProductDetailComponent implements OnInit {
   product: Product;
   originalProduct: Product;
   categories: Category[];
-  securityObject: AppUserAuth = new AppUserAuth();
+  securityObj: AppUserAuth = new AppUserAuth();
 
   constructor(
     private categoryService: CategoryService,
@@ -25,7 +25,7 @@ export class ProductDetailComponent implements OnInit {
     private location: Location,
     private securityService: SecurityService
   ) {
-    this.securityObject = this.securityService.securityObject;
+    this.securityObj = this.securityService.securityObj;
   }
 
   ngOnInit() {
@@ -84,7 +84,7 @@ export class ProductDetailComponent implements OnInit {
           () => this.dataSaved()
         );
     } else {
-      console.log("product-detail.ts: ", this.product);
+      // console.log("product-detail.ts: ", this.product);
       // Add a product
       this.productService
         .addProduct(this.product)

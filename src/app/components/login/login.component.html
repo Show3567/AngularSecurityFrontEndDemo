@@ -1,14 +1,48 @@
 <div
   class="alert alert-danger"
-  *ngIf="securityObject && !securityObject.isAuthenticated"
+  *ngIf="securityObj && !securityObj.isAuthenticated"
 >
   <p>Invalid User Name/Password.</p>
 </div>
 
 <!-- TEMPORARY CODE TO VIEW SECURITY OBJECT -->
-<p>{{ securityObject | json }}</p>
+<p>{{ securityObj | json }}</p>
 
-<form #form="ngForm">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="input__container">
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your User Name</mat-label>
+      <input matInput type="text" formControlName="username" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your password</mat-label>
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        formControlName="password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <div class="panel-footer">
+    <button mat-raised-button color="primary" style="margin-right: 10px">
+      Register
+    </button>
+    <button mat-raised-button color="primary" type="submit">Login</button>
+  </div>
+</form>
+
+<!-- <form #form="ngForm">
   <div class="input__container">
     <mat-form-field appearance="fill">
       <mat-label>Enter your User Name</mat-label>
@@ -48,4 +82,4 @@
     </button>
     <button mat-raised-button color="primary" (click)="login()">Login</button>
   </div>
-</form>
+</form> -->

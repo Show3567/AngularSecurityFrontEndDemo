@@ -27,8 +27,10 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     const claimType: string = next.data.claimType;
-    const isAuthenticated = this.securityService.securityObject.isAuthenticated;
-    const claim = this.securityService.securityObject.claim[claimType];
+    const isAuthenticated = this.securityService.securityObj.isAuthenticated;
+    const claim = this.securityService.securityObj.claim[claimType];
+
+    console.log("authguard: ", this.securityService.securityObj);
 
     if (isAuthenticated && claim) {
       return true;

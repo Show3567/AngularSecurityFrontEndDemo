@@ -6,13 +6,18 @@
   </div>
   <span class="nav-spacer"></span>
   <ul class="nav__linklist">
-    <li>
+    <li *ngIf="securityObj.claim.canAccessProducts">
       <!-- <a routerLink="/products" *hasClaim="'canAccessProducts'"> -->
-      <button routerLink="/products" mat-flat-button color="primary">
+      <button
+        routerLink="/products"
+        mat-flat-button
+        color="primary"
+        (click)="print()"
+      >
         Products
       </button>
     </li>
-    <li *ngIf="securityObject.claim.canAccessCategories">
+    <li *ngIf="securityObj.claim.canAccessCategories">
       <!-- <a routerLink="/categories" *hasClaim="'canAccessCategories'" > -->
       <button routerLink="/categories" mat-flat-button color="primary">
         Categories
@@ -24,7 +29,7 @@
     <li class="nav-item">
       <button
         routerLink="login"
-        *ngIf="!securityObject.isAuthenticated"
+        *ngIf="!securityObj.isAuthenticated"
         mat-flat-button
         color="primary"
       >
@@ -33,11 +38,11 @@
       <button
         href="#"
         (click)="logout()"
-        *ngIf="securityObject.isAuthenticated"
+        *ngIf="securityObj.isAuthenticated"
         mat-flat-button
         color="primary"
       >
-        Logout {{ securityObject.userName }}
+        Logout {{ securityObj.userName }}
       </button>
     </li>
   </ul>

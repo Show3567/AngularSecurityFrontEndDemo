@@ -12,7 +12,7 @@ import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 })
 export class ProductListComponent implements OnInit {
   products: Product[];
-  securityObject: AppUserAuth = new AppUserAuth();
+  securityObj: AppUserAuth = new AppUserAuth();
 
   trash = faTrash;
   pencil = faPencilAlt;
@@ -22,7 +22,7 @@ export class ProductListComponent implements OnInit {
     private router: Router,
     private securityService: SecurityService
   ) {
-    this.securityObject = this.securityService.securityObject;
+    this.securityObj = this.securityService.securityObj;
   }
 
   ngOnInit() {
@@ -34,7 +34,7 @@ export class ProductListComponent implements OnInit {
       .getProducts()
       // tslint:disable-next-line: deprecation
       .subscribe((products) => {
-        console.log("product list: getProduct: ", products);
+        // console.log("product list: getProduct: ", products);
         this.products = products;
       });
   }

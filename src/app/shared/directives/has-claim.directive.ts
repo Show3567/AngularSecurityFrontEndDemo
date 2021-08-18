@@ -13,7 +13,7 @@ export class HasClaimDirective {
   ) {}
 
   @Input() set hasClaim(claimType: string) {
-    if (this.securityService.securityObject.claim[claimType]) {
+    if (this.securityService.securityObj.claim[claimType]) {
       this.viewContainer.createEmbeddedView(this.templateRef);
     } else {
       this.viewContainer.clear();

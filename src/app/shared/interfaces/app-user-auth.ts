@@ -1,19 +1,19 @@
 export class AppUserAuth {
-    userName = '';
-    bearerToken = '';
-    isAuthenticated = false;
+  userName = "";
+  bearerToken? = "";
+  isAuthenticated = false;
 
-    claim = {
-        canAccessProducts: false,
-        canAddProducts: false,
-        canSaveProduct: false,
-        canAccessCategories: false,
-        canAddCategory: false,
-    };
+  claim = {
+    canAccessProducts: false,
+    canAddProducts: false,
+    canSaveProduct: false,
+    canAccessCategories: false,
+    canAddCategory: false,
+  };
 
-    // canAccessProducts = false;
-    // canAddProducts = false;
-    // canSaveProduct = false;
-    // canAccessCategories = false;
-    // canAddCategory = false;
+  // canAccessProducts = false;
+  // canAddProducts = false;
+  // canSaveProduct = false;
+  // canAccessCategories = false;
+  // canAddCategory = false;
 }
