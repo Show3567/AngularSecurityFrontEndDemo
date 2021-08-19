@@ -1,51 +1,52 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { CategoryListComponent } from './category/category-list.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { LoginComponent } from './login/login.component';
-import { ProductDetailComponent } from './product/product-detail.component';
-import { ProductListComponent } from './product/product-list.component';
-import { AuthGuard } from './security/auth.guard';
-
-
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { CategoryListComponent } from "./components/category/category-list.component";
+import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { LoginComponent } from "./components/login/login.component";
+import { ProductDetailComponent } from "./components/product/product-detail.component";
+import { ProductListComponent } from "./components/product/product-list.component";
+import { AuthGuard } from "./core/guards/auth.guard";
 
 const routes: Routes = [
   {
-    path: 'dashboard',
-    component: DashboardComponent
+    path: "dashboard",
+    component: DashboardComponent,
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: "login",
+    component: LoginComponent,
   },
   {
-    path: 'products',
+    path: "products",
     component: ProductListComponent,
     canActivate: [AuthGuard],
-    data: { claimType: 'canAccessProducts' }
+    data: { claimType: "canAccessProducts" },
   },
   {
-    path: 'productDetail/:id',
+    path: "productDetail/:id",
     component: ProductDetailComponent,
     canActivate: [AuthGuard],
-    data: { claimType: 'canAccessProducts' }
+    data: { claimType: "canAccessProducts" },
   },
   {
-    path: 'categories',
+    path: "categories",
     component: CategoryListComponent,
     canActivate: [AuthGuard],
-    data: { claimType: 'canAccessCategories' }
+    data: { claimType: "canAccessCategories" },
   },
   {
-    path: '', redirectTo: 'dashboard', pathMatch: 'full'
+    path: "",
+    redirectTo: "dashboard",
+    pathMatch: "full",
   },
   {
-    path: '**', component: DashboardComponent
-  }
+    path: "**",
+    component: DashboardComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

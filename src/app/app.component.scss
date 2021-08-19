@@ -1,0 +1,12 @@
+.nav-spacer {
+  flex: 1 1 auto;
+}
+
+.nav__linklist {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+.nav__linklist li {
+  list-style: none;
+}

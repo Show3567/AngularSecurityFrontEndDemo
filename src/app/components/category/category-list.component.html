@@ -1,0 +1,28 @@
+<h1>Category List</h1>
+
+<!-- <button mat-raised-button color="primary" *hasClaim="'canAddCategory'"> -->
+<button
+  style="margin-bottom: 15px"
+  mat-raised-button
+  color="primary"
+  *ngIf="securityObj.claim.canAddCategory"
+>
+  Add New Category
+</button>
+
+<div *ngIf="categories && categories.length">
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Category ID</th>
+        <th>Category Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{ category.categoryId }}</td>
+        <td>{{ category.categoryName }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
