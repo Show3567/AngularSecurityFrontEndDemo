@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         password: ["", [Validators.required]],
       },
       {
-        // asyncValidator: this.validateUserIsAuthenticated,
+        asyncValidator: this.validateUserIsAuthenticated(),
       }
     );
   }
@@ -88,24 +88,24 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  // validateUserIsAuthenticated = (
-  //   group: AbstractControl
-  // ): Observable<ValidationErrors | null> => {
-  //   const obj = {
-  //     userName: group.value.username,
-  //     password: group.value.password,
-  //   };
+  validateUserIsAuthenticated(): AsyncValidatorFn {
+    return (group: AbstractControl): Observable<ValidationErrors | null> => {
+      const obj = {
+        userName: group.value.username,
+        password: group.value.password,
+      };
 
-  //   return timer(500).pipe(
-  //     switchMap(() => {
-  //       return this.securityService.login(obj).pipe(
-  //         tap((data) => console.log("data in validater: ", data)),
-  //         map((data) => null),
-  //         catchError((err: any) => {
-  //           return of({ errormessage: err.error });
-  //         })
-  //       );
-  //     })
-  //   );
-  // };
+      return timer(500).pipe(
+        switchMap(() => {
+          return this.securityService.login(obj).pipe(
+            tap((data) => console.log("data in validater: ", data)),
+            map((data) => null),
+            catchError((err: any) => {
+              return of({ errormessage: err.error });
+            })
+          );
+        })
+      );
+    };
+  }
 }
