@@ -6,6 +6,7 @@ import { LoginComponent } from "./login/login.component";
 import { ProductDetailComponent } from "./product/product-detail.component";
 import { ProductListComponent } from "./product/product-list.component";
 import { SharedModule } from "../shared/shared.module";
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { SharedModule } from "../shared/shared.module";
     ProductListComponent,
     DashboardComponent,
     CategoryListComponent,
+    RegisterComponent,
   ],
   imports: [CommonModule, SharedModule],
   exports: [

@@ -14,3 +14,9 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+input:-webkit-autofill {
+  position: relative;
+  z-index: -10;
+  -webkit-box-shadow: 0 0 0 30px white inset;
+}
