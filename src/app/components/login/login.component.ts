@@ -10,8 +10,8 @@ import {
   ValidationErrors,
   Validators,
 } from "@angular/forms";
-import { fromEvent, Observable, of, timer } from "rxjs/";
-import { catchError, debounceTime, map, switchMap, tap } from "rxjs/operators";
+import { Observable, of, timer } from "rxjs/";
+import { catchError, map, switchMap, tap } from "rxjs/operators";
 
 @Component({
   selector: "ptc-login",
@@ -46,29 +46,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.returnUrl = this.route.snapshot.queryParamMap.get("returnUrl");
-
-    // this.form
-    //   .get("password")
-    //   .valueChanges.pipe(debounceTime(2000))
-    //   .subscribe((data: any) => {
-    //     console.log(data);
-    //   });
   }
-
-  // login() {
-  //   this.securityService.login(this.user).subscribe(
-  //     (info) => {
-  //       // console.log(info);
-  //       this.securityObj = info.body;
-  //       if (this.returnUrl) {
-  //         this.router.navigateByUrl(this.returnUrl);
-  //       }
-  //     },
-  //     () => {
-  //       this.securityObj = new AppUserAuth();
-  //     }
-  //   );
-  // }
 
   onSubmit() {
     this.user = {
@@ -76,13 +54,13 @@ export class LoginComponent implements OnInit {
       password: this.form.value.password,
     };
     this.securityService.login(this.user).subscribe(
-      (info) => {
-        this.securityObj = info.body;
+      (userInfo) => {
+        this.securityObj = userInfo.body;
         if (this.returnUrl) {
           this.router.navigateByUrl(this.returnUrl);
         }
       },
-      () => {
+      (err) => {
         this.securityObj = new AppUserAuth();
       }
     );
@@ -99,7 +77,7 @@ export class LoginComponent implements OnInit {
         switchMap(() => {
           return this.securityService.login(obj).pipe(
             tap((data) => console.log("data in validater: ", data)),
-            map((data) => null),
+            map(() => null),
             catchError((err: any) => {
               return of({ errormessage: err.error });
             })

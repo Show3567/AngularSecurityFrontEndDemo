@@ -21,15 +21,14 @@ const httpOptions = {
 export class SecurityService {
   private securityObject: AppUserAuth = new AppUserAuth();
 
-  constructor(private http: HttpClient) {}
-
   set securityObj(newObj: AppUserAuth) {
     this.securityObject = newObj;
   }
-
   get securityObj() {
     return this.securityObject;
   }
+
+  constructor(private http: HttpClient) {}
 
   login(entity: AppUser) {
     this.resetSecurityObject();
@@ -50,12 +49,15 @@ export class SecurityService {
   }
 
   resetSecurityObject(): void {
-    // this.securityObject = new AppUserAuth();
-    this.securityObject.userName = "";
-    this.securityObject.bearerToken = "";
-    this.securityObject.isAuthenticated = false;
+    this.securityObject = {
+      ...this.securityObject,
+      userName: "",
+      bearerToken: "",
+      isAuthenticated: false,
+    };
 
     this.securityObject.claim = {
+      ...this.securityObject.claim,
       canAccessProducts: false,
       canAddProducts: false,
       canSaveProduct: false,
